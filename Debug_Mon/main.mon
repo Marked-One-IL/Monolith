@@ -1,0 +1,5 @@
+import "std.mon"
+
+def main() -> int:
+    printf("Hello, World!\n")
+    return 0

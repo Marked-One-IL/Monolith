@@ -1,0 +1,20 @@
+def_extern printf(fmt: ptr char, ...) -> int:
+def_extern scanf(fmt: ptr char, ...) -> int:
+def_extern sqrtf(x: float) -> float:
+def_extern putchar(x: int) -> int:
+def_extern getchar() -> int:
+def_extern pow(base: float, exp: float) -> float:
+
+def_extern sinf(x: float) -> float:
+def_extern cosf(x: float) -> float:
+def_extern tanf(x: float) -> float:
+def_extern strlen(str: ptr char) -> int:
+def_extern malloc(size: int) -> ptr:
+def_extern realloc(mem: ptr, size: int) -> ptr: 
+def_extern memcpy(dst: ptr, src: ptr, size: int) -> int:
+def_extern free(mem: ptr): 
+
+typedef FILE = int
+def_extern fopen(filename: ptr char, mode: ptr char) -> ptr FILE:
+def_extern fprintf(file: ptr FILE, fmt: ptr char, ...) -> int:
+def_extern fclose(file: ptr FILE) -> int:
