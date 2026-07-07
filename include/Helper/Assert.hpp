@@ -51,10 +51,15 @@ static void Assert_abort(const char* filename, int line, const char* condition, 
     std::cerr << '\n' << finalMessage << '\n';
 #endif
 
-    _CrtDbgBreak();
     std::exit(1);
 }
 
+#ifdef NDEBUG
+#define Assert(condition)
+
+#define Assert_Message(condition, message)
+
+#else
 #define Assert(condition) \
 do { \
     if (not static_cast<bool>(condition)) \
@@ -70,3 +75,4 @@ do { \
         Assert_abort(__FILE__, __LINE__, #condition, message); \
     } \
 } while (false)
+#endif

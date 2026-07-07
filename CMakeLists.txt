@@ -8,7 +8,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS "${CMAKE_SOURCE_DIR}/src/*.cpp")
 add_executable(Monolith ${SOURCES})
 
-target_include_directories(Monolith PUBLIC ${CMAKE_SOURCE_DIR}/include)
+target_include_directories(Monolith PRIVATE ${CMAKE_SOURCE_DIR}/include)
 target_compile_definitions(Monolith PRIVATE
     CMAKE_PROJECT_ROOT="${CMAKE_SOURCE_DIR}/"
 )

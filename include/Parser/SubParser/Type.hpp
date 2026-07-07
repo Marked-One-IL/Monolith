@@ -2,6 +2,7 @@
 #include <Parser/AST/Type/Base.hpp>
 #include <Lexer/Generator.hpp>
 #include <Helper/Types.hpp>
+#include <memory>
 
 namespace Parser::SubParser
 {

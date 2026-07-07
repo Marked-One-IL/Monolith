@@ -1,4 +1,20 @@
-.vs/  
-cmake-build-*/  
-.idea/  
-out/
+# Ignore everything.
+*
+
+# Keep those files.
+!/.gitignore
+!/CMakeLists.txt
+!/README.md
+!/LICENSE
+
+# Keep those directories.
+!/Debug_Mon/
+!/assets/
+!/include/
+!/src/
+
+# Keep the content of those directories..
+!/Debug_Mon/**
+!/assets/**
+!/include/**
+!/src/**

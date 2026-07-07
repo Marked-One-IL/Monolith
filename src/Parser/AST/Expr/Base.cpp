@@ -249,8 +249,7 @@ const Parser::AST::Type::Base* Parser::AST::Expr::Base::getType(void) const
 bool Parser::AST::Expr::Base::isUnaryValid(std::string_view opr, const Parser::AST::Type::Base* type) const
 {
     if (this == nullptr) return false;
-    if (opr == "ref") return this->isDeepIdentifier();
-
+    if (opr == "ref") return this->isDeepIdentifierAndNotIsFunc(); // Doing ref func is not allowed.
     return type->isUnaryValid(opr);
 }
 
@@ -289,4 +288,43 @@ bool Parser::AST::Expr::Base::isDeepIdentifier(void) const
     }
 
     return false;
+}
+bool Parser::AST::Expr::Base::isDeepIdentifierAndNotIsFunc() const
+{
+    if (this == nullptr) return false;
+
+    switch (this->tag)
+    {
+    case Parser::AST::Tag::EXPR_ARR_ACCESS:
+    {
+        auto castedType = static_cast<const Parser::AST::Expr::ArrAccess*>(this);
+        return castedType->location->isDeepIdentifierAndNotIsFunc();
+    }
+    case Parser::AST::Tag::EXPR_STRUCT_ACCESS:
+    {
+        auto castedType = static_cast<const Parser::AST::Expr::StructAccess*>(this);
+        return castedType->location->isDeepIdentifierAndNotIsFunc();
+    }
+    case Parser::AST::Tag::EXPR_UNARY:
+    {
+        auto castedType = static_cast<const Parser::AST::Expr::Unary*>(this);
+        if (castedType->operation != "dref") return false;
+        return castedType->right->isDeepIdentifierAndNotIsFunc();
+    }
+    case Parser::AST::Tag::EXPR_IDENTIFIER:
+    {
+        auto castedType = static_cast<const Parser::AST::Expr::Identifier*>(this);
+        return castedType->origin->tag != Parser::AST::Tag::DECL_FUNC;
+        break;
+    }
+    case Parser::AST::Tag::EXPR_LITERAL:
+    case Parser::AST::Tag::EXPR_BIN:
+    case Parser::AST::Tag::EXPR_CALL:
+    case Parser::AST::Tag::EXPR_SIZEOF:
+    case Parser::AST::Tag::EXPR_CAST:
+    case Parser::AST::Tag::EXPR_ARR_INIT:
+        return true;
+    }
+
+    return true;
 }

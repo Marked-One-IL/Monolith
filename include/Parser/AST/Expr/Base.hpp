@@ -10,5 +10,6 @@ namespace Parser::AST::Expr
         const Parser::AST::Type::Base* getType(void) const;
         bool isUnaryValid(std::string_view opr, const Parser::AST::Type::Base* type) const;
         bool isDeepIdentifier(void) const;
+        bool isDeepIdentifierAndNotIsFunc(void) const;
     };
 }
