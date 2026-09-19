@@ -14,6 +14,7 @@
 #include <Helper/Assert.hpp>
 #include <array>
 #include <string_view>
+#include <algorithm>
 
 std::unique_ptr<const Parser::AST::Expr::Base> Parser::SubParser::Expr::parse(const Lexer::Generator& lexer, Uint startOff, Uint endOff)
 {

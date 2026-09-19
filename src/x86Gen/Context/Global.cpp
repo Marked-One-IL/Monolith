@@ -1,5 +1,6 @@
 #include <x86Gen/Context/Global.hpp>
 #include <Helper/Assert.hpp>
+#include <algorithm>
 
 std::list<std::vector<char>> x86Gen::Context::Global::m_strLiterals;
 std::list<std::string> x86Gen::Context::Global::m_floats;

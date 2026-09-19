@@ -15,6 +15,7 @@
 #include <Helper/Assert.hpp>
 #include <format>
 #include <array>
+#include <algorithm>
 
 Parser::AST::Type::Base::Base(Parser::AST::Type::Tag new_tag) :
     tag(new_tag)
